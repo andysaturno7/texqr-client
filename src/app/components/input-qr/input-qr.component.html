@@ -1,0 +1,8 @@
+<input
+  #inputQR
+  [disabled]="disabled"
+  (keyup.enter)="handleScanned()"
+  (blur)="onBlur($event)"
+  (focus)="onFocus($event)"
+  [(ngModel)]="inputValue"
+/>

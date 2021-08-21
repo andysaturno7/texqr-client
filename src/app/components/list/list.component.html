@@ -1,0 +1,69 @@
+<ng-container *ngIf="isElectron; else web"
+  ><h1 class="frame-brand" style="color: silver">Electron ON</h1></ng-container
+>
+<ng-template #web
+  ><h2 class="frame-brand" style="color: silver">Modo WEB</h2></ng-template
+>
+
+<ng-container *ngIf="participants">
+  <button class="btn btn-warning" (click)="getData()">Deploy</button>
+  <div class="container" (dragover)="dragover($event)" (drop)="drop($event)">
+    <table class="table table-dark">
+      <thead>
+        <td>Participante</td>
+        <td></td>
+        <td>
+          <div style="float: right">
+            <div class="row">
+              <input
+                class="form-control col-9"
+                type="text"
+                [(ngModel)]="condition"
+                id="search"
+              />
+              <label for="search" class="col-3" style="cursor: pointer">
+                <i class="fa fa-search" style="font-size: 30px"></i>
+              </label>
+            </div>
+          </div>
+        </td>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let item of participants | search: condition; index as index"
+        >
+          <td>
+            {{ item }}
+          </td>
+          <td>
+            {{ index }}
+          </td>
+          <td>
+            <div style="float: right">
+              <button class="btn btn-secondary">
+                <i class="fa fa-pencil"></i>
+              </button>
+              <button class="btn btn-danger">
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <ng-template #noFound>
+          <div *ngIf="condition" style="font-size: small">
+            No hay resultados para: {{ condition }}
+          </div>
+        </ng-template>
+      </tbody>
+    </table>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="data">
+  <ul>
+    <li *ngFor="let i of data">
+      Id: {{ i.id }} <br />
+      Name: {{ i.name }}
+    </li>
+  </ul>
+</ng-container>

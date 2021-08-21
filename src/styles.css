@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+.frame-brand {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+  padding: 3px;
+  padding-left: 5px;
+  color: aliceblue;
+}

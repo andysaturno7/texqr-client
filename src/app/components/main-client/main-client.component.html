@@ -1,0 +1,143 @@
+<input-qr
+  (scanned)="handleScanned($event)"
+  style="opacity: 0; position: absolute; top: 0"
+></input-qr>
+<div
+  class="w-100 h-100"
+  style="
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: url('assets/img/bg_cdxco.jpg');
+    background-size: cover;
+  "
+>
+  <div class="container">
+    <h1 class="text-center text-primary animate__animated animate__headShake">
+      RegistroQR
+    </h1>
+    <div>
+      <p class="text-center text-white">
+        Por favor verifique su registro presentando su código QR en el lector
+        del dispositivo.
+      </p>
+    </div>
+    <br /><br />
+    <p class="text-center">
+      <img
+        src="assets/img/demo-qr.png"
+        class="shadow animate__animated animate__bounceInUp"
+        style="border-radius: 12px"
+      />
+    </p>
+  </div>
+</div>
+
+<swal
+  #goinInSwal
+  [showCancelButton]="true"
+  [swalOptions]="{
+    confirmButtonText: 'Entrada',
+    cancelButtonText: 'Cerrar'
+  }"
+  (confirm)="goinInConfirm()"
+  (dismiss)="goinInDismiss()"
+>
+  <ng-container *swalPortal="swalTargets.title">
+    <h1 class="text-info">Bienvenido</h1>
+  </ng-container>
+  <ng-container *swalPortal="swalTargets.content">
+    <h3 class="text-info" *ngIf="registrantData">
+      {{ registrantData.firstName }} {{ registrantData.lastName }}
+    </h3>
+  </ng-container>
+</swal>
+
+<swal
+  #goinOutSwal
+  (confirm)="goinOutConfirm()"
+  (dismiss)="goinOutDismiss()"
+  [showCancelButton]="true"
+  [swalOptions]="{
+    icon: 'question',
+    confirmButtonText: 'Confirmar',
+    cancelButtonText: 'Cancelar'
+  }"
+>
+  <ng-container *swalPortal="swalTargets.title">
+    <h1 class="text-info">Nos dejas?</h1>
+  </ng-container>
+  <ng-container *swalPortal="swalTargets.content">
+    <h3 class="text-info" *ngIf="registrantData">
+      {{ registrantData.firstName }} {{ registrantData.lastName }}
+    </h3>
+  </ng-container>
+</swal>
+
+<swal
+  #thanksInSwal
+  [showCancelButton]="false"
+  [swalOptions]="{
+    confirmButtonText: 'Listo',
+    icon: 'success',
+    focusConfirm: false,
+    allowOutsideClick: false,
+    allowEnterKey: false
+  }"
+  (confirm)="setScanState(true)"
+  (dismiss)="setScanState(true)"
+>
+  <ng-container *swalPortal="swalTargets.title">
+    <h1 class="text-info">Bienvenido</h1>
+  </ng-container>
+  <ng-container *swalPortal="swalTargets.content">
+    <div *ngIf="registrantData">
+      <div class="row">
+        <div class="col text-center">
+          <h5>{{ registrantData.firstName }} {{ registrantData.lastName }}</h5>
+        </div>
+      </div>
+      <div class="row">
+        <h6 *ngIf="registrantData.company" class="col text-center">
+          {{ registrantData.company }}
+        </h6>
+      </div>
+      <div class="row">
+        <div class="col text-center">
+          Silla:
+          <span
+            *ngIf="registrantData.chair.length > 0; else noChair"
+            class="text-center text-danger"
+            >{{ registrantData.chair }}</span
+          >
+          <ng-template #noChair>
+            <i class="fa fa-ban text-info"></i
+          ></ng-template>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</swal>
+
+<swal
+  #errorSwal
+  [showConfirmButton]="false"
+  [showDenyButton]="true"
+  [swalOptions]="{
+    icon: 'error',
+    denyButtonText: 'Listo',
+    title: 'Ha habido un error.'
+  }"
+  (deny)="setScanState(true)"
+  (dismiss)="setScanState(true)"
+></swal>
+
+<div style="position: absolute; bottom: 10px; right: 10px">
+  <btn-focus [type]="'info shadow'" (click)="setScanState(true)"
+    >Scan</btn-focus
+  >
+</div>
