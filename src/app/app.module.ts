@@ -29,8 +29,7 @@ export function init() {
     );
   } else {
     return {
-      uri: 'http://192.168.137.1:5050',
-      // uri: 'http://127.0.0.1:5050',
+      uri: window.location.hostname+":5050",
       systemName: 'developSystemName',
       roomId: null,
     };
