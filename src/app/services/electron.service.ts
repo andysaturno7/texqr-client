@@ -30,4 +30,11 @@ export class ElectronService {
         this.data$.next(result);
       });
   }
+
+  send(ev: string, args = null) {
+    if (this.isElectron()) {
+      return this.electron.ipcRenderer.send(ev, args);
+    }
+    return;
+  }
 }

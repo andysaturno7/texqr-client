@@ -96,4 +96,8 @@ export class MainClientComponent implements OnInit, OnDestroy {
       }
     );
   }
+
+  handlePrint(): void {
+    this._registrants.print(this.registrantData);
+  }
 }

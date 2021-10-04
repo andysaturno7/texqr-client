@@ -25,7 +25,7 @@ export function init() {
     var fs = (<any>window).require('fs');
     var path = (<any>window).require('path');
     return JSON.parse(
-      fs.readFileSync(path.join(__dirname, 'assets', 'config', 'ws.json'))
+      fs.readFileSync(path.join(__dirname, 'assets', 'config.json'))
     );
   } else {
     return {

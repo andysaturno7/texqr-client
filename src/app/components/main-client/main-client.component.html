@@ -81,8 +81,10 @@
 <swal
   #thanksInSwal
   [showCancelButton]="false"
+  [showDenyButton]="true"
   [swalOptions]="{
     confirmButtonText: 'Listo',
+    denyButtonText: 'Imprimir',
     icon: 'success',
     focusConfirm: false,
     allowOutsideClick: false,
@@ -90,6 +92,7 @@
   }"
   (confirm)="setScanState(true)"
   (dismiss)="setScanState(true)"
+  (deny)="handlePrint()"
 >
   <ng-container *swalPortal="swalTargets.title">
     <h1 class="text-info">Bienvenido</h1>
