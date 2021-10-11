@@ -22,14 +22,18 @@ declare const __dirname: any;
 
 export function init() {
   if ((<any>window).require) {
+    console.log('any window reue');
+
     var fs = (<any>window).require('fs');
     var path = (<any>window).require('path');
     return JSON.parse(
       fs.readFileSync(path.join(__dirname, 'assets', 'config.json'))
     );
   } else {
+    console.log('any window false');
+
     return {
-      uri: window.location.hostname+":5050",
+      uri: window.location.hostname + ':5050',
       systemName: 'developSystemName',
       roomId: null,
     };

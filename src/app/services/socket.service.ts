@@ -13,6 +13,8 @@ export class SocketService {
     @Inject('API_CONF') private conf: any,
     private _asistance: AsistanceService
   ) {
+    console.log({ conf: this.conf });
+
     this.socket = io(this.conf.uri, {
       extraHeaders: {
         'tex-header': '',
